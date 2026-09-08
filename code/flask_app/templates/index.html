@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATS CV Generator — AI-Enhanced</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background: #0f172a; color: #e2e8f0; padding: 24px; }
+    .card { background: #1e293b; border-radius: 16px; padding: 32px; max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 22px; margin-bottom: 20px; }
+    form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+    label { font-size: 13px; font-weight: 600; color: #cbd5e1; }
+    input, textarea { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px 12px; color: #e2e8f0; font-size: 14px; font-family: inherit; }
+    textarea { resize: vertical; }
+    button { background: #6366f1; color: white; border: none; border-radius: 8px; padding: 12px; font-size: 14px; font-weight: 600; cursor: pointer; }
+    button:hover { background: #4f46e5; }
+    .result { margin-top: 16px; padding: 14px; border-radius: 8px; background: rgba(99,102,241,0.1); font-size: 14px; display: none; }
+    .tone-tip { margin-top: 8px; padding: 10px; border-radius: 8px; background: rgba(249,115,22,0.12); color: #fdba74; font-size: 13px; }
+    hr { border-color: #334155; margin: 24px 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Generate ATS-Optimized CV</h1>
+    <form id="cv-form">
+      <label>Full Name</label>
+      <input type="text" id="full_name" required>
+      <label>Email</label>
+      <input type="email" id="email" required>
+      <label>Phone</label>
+      <input type="text" id="phone" required>
+      <label>Professional Summary</label>
+      <textarea id="summary" rows="3" required></textarea>
+      <label>Skills</label>
+      <textarea id="skills" rows="2" required></textarea>
+      <label>Experience</label>
+      <textarea id="experience" rows="3" required></textarea>
+      <label>Education</label>
+      <textarea id="education" rows="2" required></textarea>
+      <button type="submit">Generate CV</button>
+    </form>
+    <div id="generate-result" class="result"></div>
 
+    <hr>
+
+    <h1>Analyze Against Job Description</h1>
+    <form id="analyze-form">
+      <label>CV ID (from above)</label>
+      <input type="text" id="cv_id" required>
+      <label>Job Description</label>
+      <textarea id="job_description" rows="5" required></textarea>
+      <button type="submit">Compare with Job</button>
+    </form>
+    <div id="analyze-result" class="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('cv-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        full_name: full_name.value, email: email.value, phone: phone.value,
+        summary: summary.value, skills: skills.value,
+        experience: experience.value, education: education.value,
+      };
+      const res = await fetch('/generate-cv', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      const data = await res.json();
+      const box = document.getElementById('generate-result');
+      box.style.display = 'block';
+      box.innerHTML = data.download_url
+        ? `✅ CV ID: <b>${data.cv_id}</b><br><a href="${data.download_url}" target="_blank">Download CV</a><div class="tone-tip">🤖 Tone check: ${data.tone_check}</div>`
+        : `❌ ${data.error}`;
+    });
+
+    document.getElementById('analyze-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = { cv_id: cv_id.value, job_description: job_description.value };
+      const res = await fetch('/analyze-cv', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      const data = await res.json();
+      const box = document.getElementById('analyze-result');
+      box.style.display = 'block';
+      box.innerHTML = data.match_score !== undefined
+        ? `Match: <b>${data.match_score}%</b><br>Missing phrases: ${data.missing_phrases.join(', ')}<br>${data.suggestions}`
+        : `❌ ${data.error}`;
+    });
+  </script>
+</body>
+</html>
