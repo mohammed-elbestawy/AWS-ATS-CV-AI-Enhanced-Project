@@ -49,6 +49,8 @@ Region: `eu-north-1`
 Generated a CV and received an AI-based tone check on the professional summary alongside the usual download link. Ran the JD analyzer using Comprehend key-phrase extraction instead of regex — producing coherent phrase-level matches instead of fragmented single-word comparisons.
 
 ![Full end-to-end test — CV generation with tone check](screenshots/16-fulltest-generate.png)
+
+#
 ![Full end-to-end test — JD analysis with key phrases](screenshots/16-fulltest-analyze.png)
 
 ## Skills Demonstrated
