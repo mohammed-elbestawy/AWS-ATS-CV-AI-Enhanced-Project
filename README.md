@@ -6,14 +6,17 @@
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat&logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Live%20Tested-brightgreen)
 
-## Table of Contents
-- [The Problem](#the-problem)
-- [Architecture](#architecture)
-- [Live Test Result](#live-test-result)
-- [Skills Demonstrated](#skills-demonstrated)
-- [Cost Decisions](#cost-decisions)
-- [Possible Improvements](#possible-improvements)
-- [Repository Structure](#repository-structure)
+## 📋 Table of Contents
+
+| Section | Description |
+|---|---|
+| 🎯 [The Problem](#the-problem) | Why this version exists |
+| 🏗 [Architecture](#architecture) | Service layers, now with Comprehend |
+| ✅ [Live Test Result](#live-test-result) | End-to-end test proof |
+| 🛠 [Skills Demonstrated](#skills-demonstrated) | What this project shows |
+| 💰 [Cost Decisions](#cost-decisions) | Comprehend billing reality |
+| 🚀 [Possible Improvements](#possible-improvements) | Future enhancements |
+| 📁 [Repository Structure](#repository-structure) | File layout |
 
 ## The Problem
 
