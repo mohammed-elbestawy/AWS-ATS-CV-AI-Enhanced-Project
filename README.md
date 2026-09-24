@@ -1,6 +1,6 @@
 # 🎯 ATS CV Generator — AI-Enhanced (Amazon Comprehend)
 
-> An evolution of the original serverless ATS CV Generator — same core architecture, now with Amazon Comprehend replacing naive regex matching with real language understanding.
+> An evolution of the original hybrid ATS CV Generator — same core architecture, now with Amazon Comprehend replacing naive regex matching with real language understanding.
 
 ![AWS](https://img.shields.io/badge/AWS-Free%20Tier-FF9900?style=flat&logo=amazonaws&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat&logo=python&logoColor=white)
